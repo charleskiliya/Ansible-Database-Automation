@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Récupérer le code source depuis le référentiel Git
-                git 'git@github.com:charleskiliya/Ansible.git'
+                git 'https://github.com/charleskiliya/Ansible-Database-Automation.git'
             }
         }
 
