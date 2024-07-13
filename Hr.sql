@@ -1,4 +1,5 @@
 
+
 CREATE DATABASE HumanRessources;
 
 CREATE TABLE JOBS (
@@ -47,14 +48,14 @@ VALUES
 
 INSERT INTO EMPLOYEES (EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
 VALUES
-  (1001, 'John', 'Doe', 'john.doe@ruashimining.org', '555-1234', '2020-01-01', 'JOB001', 70000, 0.1, 1005, 10),
-  (1002, 'Jane', 'Smith', 'jane.smith@ruashimining.org', '555-5678', '2021-03-15', 'JOB002', 90000, 0.15, 1005, 20),
-  (1003, 'Bob', 'Johnson', 'bob.johnson@ruashimining.org', '555-9012', '2019-06-30', 'JOB003', 55000, 0.05, 1007, 30),
-  (1004, 'Sarah', 'Lee', 'sarah.lee@ruashimining.org', '555-3456', '2022-09-01', 'JOB004', 45000, 0.2, 1008, 40),
-  (1005, 'Michael', 'Brown', 'michael.brown@ruashimining.org', '555-7890', '2018-11-10', 'JOB002', 100000, 0.2, NULL, 20),
-  (1006, 'Emily', 'Davis', 'emily.davis@ruashimining.org', '555-2345', '2021-04-20', 'JOB005', 65000, 0.1, 1005, 50),
-  (1007, 'David', 'Wilson', 'david.wilson@ruashimining.org', '555-6789', '2020-02-15', 'JOB003', 60000, 0.08, 1005, 30),
-  (1008, 'Olivia', 'Taylor', 'olivia.taylor@ruashimining.org', '555-0123', '2022-05-01', 'JOB004', 50000, 0.15, 1005, 40);
+  (1001, 'John', 'Doe', 'john.doe@metorexgroup.com', '555-1234', '2020-01-01', 'JOB001', 70000, 0.1, 1005, 10),
+  (1002, 'Jane', 'Smith', 'jane.smith@metorexgroup.com', '555-5678', '2021-03-15', 'JOB002', 90000, 0.15, 1005, 20),
+  (1003, 'Bob', 'Johnson', 'bob.johnson@metorexgroup.com', '555-9012', '2019-06-30', 'JOB003', 55000, 0.05, 1007, 30),
+  (1004, 'Sarah', 'Lee', 'sarah.lee@metorexgroup.com', '555-3456', '2022-09-01', 'JOB004', 45000, 0.2, 1008, 40),
+  (1005, 'Michael', 'Brown', 'michael.brown@metorexgroup.com', '555-7890', '2018-11-10', 'JOB002', 100000, 0.2, NULL, 20),
+  (1006, 'Emily', 'Davis', 'emily.davis@metorexgroup.com', '555-2345', '2021-04-20', 'JOB005', 65000, 0.1, 1005, 50),
+  (1007, 'David', 'Wilson', 'david.wilson@metorexgroup.com', '555-6789', '2020-02-15', 'JOB003', 60000, 0.08, 1005, 30),
+  (1008, 'Olivia', 'Taylor', 'olivia.taylor@metorexgroup.com', '555-0123', '2022-05-01', 'JOB004', 50000, 0.15, 1005, 40);
 
 INSERT INTO JOB_HISTORY (EMPLOYEE_ID, START_DATE, END_DATE, JOB_ID, DEPARTMENT_ID)
 VALUES
@@ -69,4 +70,3 @@ VALUES
   (1007, '2020-02-15', '2022-06-30', 'JOB003', 30),
   (1007, '2022-07-01', CURRENT_DATE, 'JOB001', 10),
   (1008, '2022-05-01', CURRENT_DATE, 'JOB004', 40);
-

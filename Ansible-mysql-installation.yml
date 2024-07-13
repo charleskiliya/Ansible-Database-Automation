@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  hosts: "{{ NODES }}"
+  become: true
+  tasks:
+    - name: Install MYSQL
+      ansible.builtin.apt:
+        name: 
+          - mysql-server
+          - mysql-client
+
+
