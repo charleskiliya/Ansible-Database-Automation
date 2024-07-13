@@ -1,0 +1,123 @@
+# Chapter-08/mysql-manage-database.yaml
+---
+- name: Deploying MYSQL Database Server
+  hosts: "{{ NODES }}" 
+  vars: 
+    mysql_user: Charles
+    mysql_password: 'Esis@123'
+    mysql_host: 10.3.1.1
+    mysql_database: Test
+    mysql_table: demo_table
+    mysql_new_user_name: devteam
+    mysql_new_user_password: 'Esis@1234'
+  tasks:
+    - name: Create a new database
+      community.mysql.mysql_db:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: "{{ mysql_database }}"
+      when: database_action == 'create'
+
+    - name: Delete database
+      community.mysql.mysql_db:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        state: absent
+        name: hrd
+      when: database_action == 'delete'
+
+    - name: Dump multiple databases
+      community.mysql.mysql_db:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        state: dump
+        name: hrd
+        target: /tmp/dump.sql
+      when: database_action == 'dump'
+
+    - name: Restore database 
+      community.mysql.mysql_db:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: hrd
+        state: import
+        target: /tmp/dump.sql
+        force: true
+      when: database_action == 'restore'
+
+    - name: create database user with name 'Emma' and password '12345' with all database privileges
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Swan
+        password: 12345
+        host: 10.3.1.1
+        priv: '*.*:ALL'
+        state: present
+      when: database_action == 'user'
+
+    - name: create database user with name 'Alice' and password 'Esis@123' with all database privileges
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Alice
+        password: Esis@123
+        host: 10.3.1.1
+        priv: '*.*: UPDATE,INSERT,CREATE'
+        state: present
+      when: database_action == 'crud'
+
+    - name: Ensure a user does not have the delete privilege
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Alice
+        substract_privs: true
+        priv:
+          'Hrdb.*': DELETE
+      when: database_action == 'substract'
+
+    - name: Revoke all privileges for a user 
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Emma
+        password: 12345
+        priv: '*.*:USAGE'
+        state: present
+      when: database_action == 'revoke' 
+
+
+    - name: Revoke all privileges for a user 
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Emma
+        password: 12345
+        priv: 'Hrdb.*:SELECT,INSERT,UPDATE'
+        state: present
+      when: database_action == 'revoke' 
+
+
+    - name: Limit the user ressources to 10 querries per hour and 5 connections per hour
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: Alice
+        ressource_limits:
+          MAX_QUERIES_PER_HOUR: 10
+          MAX_CONNECTIONS_PER_HOUR: 5
+      when: database_action == 'ressource'
+
+     
+    
