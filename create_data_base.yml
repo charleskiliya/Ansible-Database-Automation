@@ -150,3 +150,15 @@
         - 'Alice@%'
         - 'Emma@%'
       when: database_action == 'role'
+
+  - name: Add members to the existing role
+    community.mysql.mysql_role:
+      login_user: "{{ mysql_user }}"
+      login_password: "{{ mysql_password }}"
+      login_host: "{{ mysql_host }}"
+      name: developers
+      state: present
+      append_members: true
+      members:
+      - 'Charles@10.3.1.1'
+    when: database_action == 'add-member'
