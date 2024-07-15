@@ -118,5 +118,15 @@
           MAX_CONNECTIONS_PER_HOUR: 5
       when: database_action == 'ressource'
 
-     
-    
+    - name: Create role developers, add members
+      community.mysql.mysql_role:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: developers
+        state: present
+        priv: '*.*:ALL'
+        members:
+          - 'Alice@%'
+          - 'Emma@%'
+      when: database_action == 'role'
