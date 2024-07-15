@@ -71,6 +71,15 @@
         state: present
       when: database_action == 'user-no-priv'
 
+    - name: Remove database user 'bob'
+      community.mysql.mysql_user:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        name: bob
+        state: absent
+      when: database_action == 'userdel'
+
     - name: create database user with name 'Alice' and password 'Esis@123' with all database privileges
       community.mysql.mysql_user:
         login_user: "{{ mysql_user }}"
