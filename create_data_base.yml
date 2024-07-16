@@ -10,6 +10,15 @@
     mysql_new_user_name: devteam
     mysql_new_user_password: 'Esis@1234'
   tasks:
+    - name: Start MYSQL replica with user Test
+      community.mysql.mysql_replica:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        mode: startreplica
+        connection_name: Test
+      when: database_action == "replica"
+
     - name: Create a new database
       community.mysql.mysql_db:
         login_user: "{{ mysql_user }}"
