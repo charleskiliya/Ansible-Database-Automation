@@ -18,7 +18,18 @@
         login_host: "{{ mysql_host }}"
         mode: startreplica
         connection_name: Test
-      when: database_action == "replica"
+      when: database_action == "start-replica"
+
+    - name: Change primary to primary server 10.3.1.1 and use binary log 'binlog.000017' with position 157
+      community.mysql.mysql_replication:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_password }}"
+        login_host: "{{ mysql_host }}"
+        mode: changeprimary
+        primary_host: 10.3.1.1
+        primary_log_file: binlog.000017
+        primary_log_pos: 157
+      when: database_action == 'change'
 
     - name: Create a new database # Creation d'une nouvelle base de donnees
       community.mysql.mysql_db:
