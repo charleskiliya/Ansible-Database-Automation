@@ -9,8 +9,9 @@
     mysql_table: demo_table
     mysql_new_user_name: devteam
     mysql_new_user_password: 'Esis@1234'
+
   tasks:
-    - name: Start MYSQL replica with user Test
+    - name: Start MYSQL replica with user Test # Demarrage de la replication 
       community.mysql.mysql_replica:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
@@ -19,7 +20,7 @@
         connection_name: Test
       when: database_action == "replica"
 
-    - name: Create a new database
+    - name: Create a new database # Creation d'une nouvelle base de donnees
       community.mysql.mysql_db:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
@@ -27,7 +28,7 @@
         name: "{{ mysql_database }}"
       when: database_action == 'create'
 
-    - name: Delete database
+    - name: Delete database # ce script permet de Supprimer une base de donnees lors de l'appel de l'action delete
       community.mysql.mysql_db:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
@@ -36,7 +37,7 @@
         name: hrd
       when: database_action == 'delete'
 
-    - name: Dump multiple databases
+    - name: Dump multiple databases # La sauvegarde de donnees sur le serveur
       community.mysql.mysql_db:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
@@ -46,7 +47,7 @@
         target: /tmp/dump.sql
       when: database_action == 'dump'
 
-    - name: Restore database 
+    - name: Restore database # La restauration de donnees
       community.mysql.mysql_db:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
@@ -80,7 +81,7 @@
         state: present
       when: database_action == 'user-no-priv'
 
-    - name: Remove database user 'bob'
+    - name: Remove database user 'bob' # Suppression d'un utilisateur
       community.mysql.mysql_user:
         login_user: "{{ mysql_user }}"
         login_password: "{{ mysql_password }}"
