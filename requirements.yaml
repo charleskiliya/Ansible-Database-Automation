@@ -9,3 +9,9 @@ collections:
   - name: community.mysql
     version: 2.1.1
     source: https://galaxy.ansible.com
+
+Avoir la meme version de mysql-serveur sur les deux serveurs de bases de donnees
+Installer ubuntu-server 2024
+Telecharger le containeur webjava
+Avoir le pare-feu Fortinet 7.2
+Installer ubuntu_desktop_guest 2023
